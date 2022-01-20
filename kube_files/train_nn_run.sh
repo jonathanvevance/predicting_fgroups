@@ -16,5 +16,5 @@ cd /scratch/scratch6/jonathanvevance/projects/predicting_fgroups_ddp/
 
 # Run the code. The -u option is used here to use unbuffered writes
 # so that output is piped to the file as and when it is produced
-python -u ./main.py &>> /scratch/scratch6/jonathanvevance/projects/predicting_fgroups_ddp/kube_files/train_nn_logs.txt  
+python -u ./src/train_nn.py &>> /scratch/scratch6/jonathanvevance/projects/predicting_fgroups_ddp/kube_files/train_nn_logs.txt  
 
