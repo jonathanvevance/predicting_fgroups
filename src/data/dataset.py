@@ -67,8 +67,8 @@ class reactionDataset(data.Dataset):
             with open(cleaned_dataset_path) as file:
                 for idx, line in enumerate(tqdm(file, total = tqdm_num_lines)):
 
-                    if idx == 50000:
-                        break # check if it is learning
+                    # if idx == 50000:
+                    #     break # check if it is learning
 
                     lhs, rhs = line.split()[0].split('>>')
                     lhs_mols = lhs.split('.')
