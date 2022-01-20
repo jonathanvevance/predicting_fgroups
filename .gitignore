@@ -77,7 +77,8 @@ target/
 
 # exclude data from source control by default
 /data/raw/*
-/data/processed/*
+/data/processed/chembl/*
+/data/processed/fgroup/*
 /kube_files/train_nn_logs.txt
 
 # Mac OS-specific storage files
