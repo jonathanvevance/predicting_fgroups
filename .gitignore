@@ -76,8 +76,8 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/raw/
-/data/processed/
+/data/raw/*
+/data/processed/*
 /kube_files/train_nn_logs.txt
 
 # Mac OS-specific storage files
