@@ -60,11 +60,6 @@ for epoch in range(EPOCHS):  # loop over the dataset multiple times
 
     if (epoch + 1) % 5 == 0:
 
-        #! debugging class imbalance
-        # print(outputs)
-        ones = (labels == 1.).sum()
-        print("Sparsity = ", ones.item() / torch.numel(labels))
-
         val_losses_avg = evaluate_model(model, criterion, val_loader, DEVICE, epoch)
         stop = early_stopping(val_losses_avg, model)
 

@@ -97,11 +97,6 @@ class reactionDataset(data.Dataset):
             dataset_dict = {'X': self.X, 'Y': self.Y}
             np.save(processed_dataset_path, dataset_dict)
 
-            #! <------------------------
-            print(self.X.shape)
-            exit()
-
-
     def __len__(self):
         return len(self.X)
 
