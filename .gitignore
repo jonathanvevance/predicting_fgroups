@@ -75,7 +75,7 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
-# exclude data from source control by default
+# exclude dirs
 /data/raw/*
 /data/processed/chembl/*
 /data/processed/fgroup/*
