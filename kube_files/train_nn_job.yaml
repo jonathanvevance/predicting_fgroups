@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   # Name of the pod. This is the name to use in any interaction with kubectl
-  name: nerf-main-train
+  name: predict-fgroups-train-nn
 spec:
   securityContext:
     # You need to specify your user ID here. You can get this by running "id -u"
@@ -65,7 +65,7 @@ spec:
     # call that script like below.
     # 
     # Note that all paths have to be according to the filesystem inside the container.
-    command: ["/bin/bash", "/scratch/scratch6/jonathanvevance/projects/nerf_ddp/kube_files/main_run.sh"]
+    command: ["/bin/bash", "/scratch/scratch6/jonathanvevance/projects/predicting_fgroups_ddp/kube_files/train_nn_run.sh"]
     # This section specifies the resources you ask for.
     resources:
       # For the purposes of using the cluster, the "requests" section should be the
