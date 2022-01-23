@@ -1,8 +1,29 @@
 """MIL functions."""
 
 import torch
+import torch.nn as nn
 from sklearn.metrics import precision_recall_fscore_support
 from tqdm import tqdm
+
+class weightedLoss(nn.Module):
+    def __init__(self, torch_loss, weight, device):
+        """
+        Args:
+            torch_loss : torch criterion class (NOT OBJECT)
+            weight : torch tensor dealing with class imbalance
+        """
+        super(weightedLoss, self).__init__()
+        self.weight = weight.to(device)
+        self.criterion = torch_loss(reduction = 'none')
+
+    def forward(self, output, labels):
+        """Forward function."""
+        weight_ = self.weight[labels.data.view(-1).long()].view_as(labels)
+        loss = self.criterion(output, labels)
+        loss_class_weighted = loss * weight_
+        loss_class_weighted = loss_class_weighted.mean()
+
+        return loss_class_weighted
 
 class EarlyStopping():
     """A simple Early Stopping implementation."""

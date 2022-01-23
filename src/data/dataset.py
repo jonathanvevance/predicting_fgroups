@@ -67,8 +67,8 @@ class reactionDataset(data.Dataset):
             with open(cleaned_dataset_path) as file:
                 for idx, line in enumerate(tqdm(file, total = tqdm_num_lines)):
 
-                    # if idx == 50000:
-                    #     break # check if it is learning
+                    if idx == 100:
+                        break # check if it is learning
 
                     lhs, rhs = line.split()[0].split('>>')
                     lhs_mols = lhs.split('.')
@@ -102,3 +102,10 @@ class reactionDataset(data.Dataset):
 
     def __getitem__(self, index):
         return torch.tensor(self.X[index]), torch.tensor(self.Y[index])
+
+    def get_class_weights(self):
+        non_zero_count = np.count_nonzero(self.Y)
+        zero_count = self.Y.size - non_zero_count
+        non_zero_frac = non_zero_count / (non_zero_count + zero_count)
+        zero_frac = 1 - non_zero_frac
+        return torch.Tensor([non_zero_frac, zero_frac])

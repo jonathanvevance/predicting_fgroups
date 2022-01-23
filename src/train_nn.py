@@ -7,6 +7,7 @@ from utils.train_utils import evaluate_model
 from utils.train_utils import EarlyStopping
 from utils.train_utils import print_model_accuracy
 from utils.train_utils import save_model
+from utils.train_utils import weightedLoss
 import torch.optim as optim
 import torch.nn as nn
 
@@ -39,7 +40,7 @@ model = simpleNet(representation = REPRESENTATION)
 model = model.double().to(DEVICE)
 
 # train settings
-criterion = nn.BCELoss()
+criterion = weightedLoss(nn.BCELoss, train_dataset.get_class_weights(), DEVICE)
 early_stopping = EarlyStopping(patience = ES_PATIENCE , delta = ES_DELTA)
 optimizer = optim.Adam(model.parameters(), lr = LEARNING_RATE, weight_decay = WEIGHT_DECAY)
 

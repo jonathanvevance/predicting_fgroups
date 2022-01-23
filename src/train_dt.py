@@ -24,7 +24,7 @@ X_val, Y_val = val_dataset.X, val_dataset.Y
 X_test, Y_test = test_dataset.X, test_dataset.Y
 
 # ----- load model
-classifier = DecisionTreeClassifier(criterion='entropy',random_state=0)
+classifier = DecisionTreeClassifier(class_weight = 'balanced', random_state=0)
 classifier.fit(X_train, Y_train)
 
 # ----- 
