@@ -12,8 +12,9 @@ source /tools/config.sh
 source activate /scratch/scratch6/jonathanvevance/envs/nerf
 
 # Change to the directory in which your code is present
-cd /scratch/scratch6/jonathanvevance/projects/nerf_ddp/
+cd /scratch/scratch6/jonathanvevance/projects/predicting_fgroups_ddp/
 
 # Run the code. The -u option is used here to use unbuffered writes
 # so that output is piped to the file as and when it is produced
-python -u ./preprocess.py &>> /scratch/scratch6/jonathanvevance/projects/nerf_ddp/kube_files/preprocess_logs.txt
+python -u ./src/train_dt.py &>> /scratch/scratch6/jonathanvevance/projects/predicting_fgroups_ddp/kube_files/train_dt_logs.txt  
+

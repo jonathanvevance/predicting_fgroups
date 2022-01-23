@@ -95,7 +95,7 @@ class reactionDataset(data.Dataset):
 
             # save pickle for the future # https://newbedev.com/saving-dictionary-of-numpy-arrays
             dataset_dict = {'X': self.X, 'Y': self.Y}
-            np.save(processed_dataset_path, dataset_dict)
+            # np.save(processed_dataset_path, dataset_dict) # pickling issue with large files
 
     def __len__(self):
         return len(self.X)
