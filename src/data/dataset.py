@@ -71,8 +71,8 @@ class reactionDataset(data.Dataset):
             with open(cleaned_dataset_path) as file:
                 for idx, line in enumerate(tqdm(file, total = tqdm_num_lines)):
 
-                    # if idx == 100:
-                    #     break # check if it is learning
+                    if idx == 100:
+                        break # check if it is learning
 
                     lhs, rhs = line.split()[0].split('>>')
                     lhs_mols = lhs.split('.')
@@ -110,11 +110,12 @@ class reactionDataset(data.Dataset):
             # np.save(processed_dataset_path, dataset_dict) # pickling issue with large files
 
             #! REMOVE
-            class_freq /= count
-            total = np.size(class_freq)
-            sufficient = np.count_nonzero(np.where(class_freq > 0.05)) # imbalance that is not worse than 95%
-            print(total, total - sufficient, sufficient)
-            exit()
+            # class_freq /= count
+            # total = np.size(class_freq)
+            # sufficient = np.count_nonzero(np.where(class_freq > 0.05)) # imbalance that is not worse than 95%
+            # print(total, total - sufficient, sufficient)
+            # exit()
+            
 
     def __len__(self):
         return len(self.X)
