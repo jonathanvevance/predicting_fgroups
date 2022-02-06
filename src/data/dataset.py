@@ -49,6 +49,10 @@ class reactionDataset(data.Dataset):
 
         else:
 
+            #! REMOVE
+            count = 0
+            class_freq = None
+
             self.X = []
             self.Y = []
             self.features_data = features_data
@@ -67,8 +71,8 @@ class reactionDataset(data.Dataset):
             with open(cleaned_dataset_path) as file:
                 for idx, line in enumerate(tqdm(file, total = tqdm_num_lines)):
 
-                    if idx == 100:
-                        break # check if it is learning
+                    # if idx == 100:
+                    #     break # check if it is learning
 
                     lhs, rhs = line.split()[0].split('>>')
                     lhs_mols = lhs.split('.')
@@ -87,8 +91,16 @@ class reactionDataset(data.Dataset):
                     if self.scaler is not None:
                         raise NotImplementedError # multi hot vectors dont need scaling
 
-                    self.X.append(x_vec)
-                    self.Y.append(y_vec)
+                    #! UNCOMMENT
+                    # self.X.append(x_vec)
+                    # self.Y.append(y_vec)
+
+                    #! REMOVE
+                    count += 1
+                    if class_freq is None:
+                        class_freq = y_vec
+                    else:
+                        class_freq += y_vec
 
             self.X = np.array(self.X)
             self.Y = np.array(self.Y)
@@ -96,6 +108,13 @@ class reactionDataset(data.Dataset):
             # save pickle for the future # https://newbedev.com/saving-dictionary-of-numpy-arrays
             dataset_dict = {'X': self.X, 'Y': self.Y}
             # np.save(processed_dataset_path, dataset_dict) # pickling issue with large files
+
+            #! REMOVE
+            class_freq /= count
+            total = np.size(class_freq)
+            sufficient = np.count_nonzero(np.where(class_freq > 0.05)) # imbalance that is not worse than 95%
+            print(total, total - sufficient, sufficient)
+            exit()
 
     def __len__(self):
         return len(self.X)
